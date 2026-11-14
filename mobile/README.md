@@ -56,3 +56,7 @@ Run code generation again after adding Freezed or JSON-serializable models. Gene
 5. Add profile preferences and a language selector when their persistence behavior is defined.
 
 ## Getting Started
+
+
+
+
