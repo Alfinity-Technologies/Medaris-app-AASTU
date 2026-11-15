@@ -1,0 +1,39 @@
+
+name: Backend CI
+
+on:
+  push:
+    branches:
+      - develop
+
+  pull_request:
+    branches:
+      - develop
+
+  workflow_dispatch:
+
+jobs:
+  backend-check:
+    name: Backend Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: api/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: api
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check src/app.js
+          node --check src/server.js
+        working-directory: api
